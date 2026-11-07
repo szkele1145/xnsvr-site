@@ -192,8 +192,35 @@
     function initCopyIp() {
         copyIpBtn.addEventListener('click', async () => {
             const ip = serverIpEl.textContent.trim();
-            try {
-                await navigator.clipboard.writeText(ip);
+            let success = false;
+
+            // 优先用现代 API（需 HTTPS）
+            if (navigator.clipboard && window.isSecureContext) {
+                try {
+                    await navigator.clipboard.writeText(ip);
+                    success = true;
+                } catch (e) {
+                    // 降级
+                }
+            }
+
+            // 降级：用 execCommand（兼容 HTTP）
+            if (!success) {
+                try {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = ip;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    success = document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                } catch (e) {
+                    success = false;
+                }
+            }
+
+            if (success) {
                 showToast('已复制：' + ip);
                 copyIpBtn.classList.add('copied');
                 copyIpBtn.querySelector('span').textContent = '已复制';
@@ -201,8 +228,8 @@
                     copyIpBtn.classList.remove('copied');
                     copyIpBtn.querySelector('span').textContent = '复制地址';
                 }, 2000);
-            } catch (e) {
-                showToast('复制失败，请手动复制');
+            } else {
+                showToast('复制失败，请手动复制：' + ip);
             }
         });
     }

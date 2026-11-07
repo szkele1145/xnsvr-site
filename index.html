@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="星凝市 - Minecraft MTR模组服务器 | ymtr 3.2.2改版 | 1.20.1 Fabric">
+    <title>星凝市 · MTR服务器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景音乐 -->
+    <audio id="bgm" src="assets/audio/bgm.mp3" loop preload="auto"></audio>
+
+    <!-- 粒子背景画布 -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- 音乐控制按钮 -->
+    <button id="music-toggle" class="music-toggle" aria-label="播放/暂停背景音乐">
+        <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        <span class="music-hint">音乐</span>
+    </button>
+
+    <!-- 进站提示 -->
+    <div class="enter-prompt" id="enterPrompt">
+        <div class="prompt-content">
+            <div class="prompt-icon">🚇</div>
+            <h2>欢迎来到星凝市</h2>
+            <p>点击任意位置进站</p>
+            <div class="prompt-sub">弱水三千 · 只取一瓢</div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <main id="mainContent" class="main-content" style="display: none;">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="16" width="48" height="32" rx="4" stroke="currentColor" stroke-width="3"/>
+                        <rect x="14" y="22" width="12" height="20" rx="2" fill="currentColor"/>
+                        <rect x="28" y="22" width="12" height="20" rx="2" fill="currentColor"/>
+                        <rect x="42" y="22" width="12" height="20" rx="2" fill="currentColor"/>
+                        <circle cx="16" cy="52" r="4" fill="currentColor"/>
+                        <circle cx="48" cy="52" r="4" fill="currentColor"/>
+                    </svg>
+                    <span class="logo-text">星凝市</span>
+                </div>
+                <nav class="nav">
+                    <a href="#about" class="nav-link">服务器信息</a>
+                    <a href="#gallery" class="nav-link">线路展示</a>
+                    <a href="#features" class="nav-link">特色系统</a>
+                    <a href="#contact" class="nav-link">社群联系</a>
+                </nav>
+            </div>
+            <div class="header-right">
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span>在线运营中</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero 区域 -->
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <div class="hero-badge">MTR · ymtr 3.2.2改版</div>
+                <h1 class="hero-title">
+                    <span class="title-line">星凝市</span>
+                    <span class="title-line title-sub">Minecraft 铁路模组服务器</span>
+                </h1>
+                <p class="hero-desc">在方块世界里，驾驶列车穿梭于高楼大厦与山川湖海之间</p>
+                <div class="hero-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">版本</span>
+                        <span class="meta-value">1.20.1 Fabric</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">模组</span>
+                        <span class="meta-value">ymtr 3.2.2 (MTR改版)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">整合包</span>
+                        <span class="meta-value">群文件获取</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="#about" class="btn btn-primary">了解服务器</a>
+                    <a href="#contact" class="btn btn-secondary">加入社群</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="server-ip-card">
+                    <div class="ip-label">服务器地址</div>
+                    <div class="ip-value" id="serverIp">xnsvr.ccwu.cc</div>
+                    <button class="btn-copy" id="copyIp" aria-label="复制服务器地址">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span>复制</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服务器信息 -->
+        <section id="about" class="section about-section">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">ABOUT</span>
+                    <h2 class="section-title">服务器信息</h2>
+                    <p class="section-desc">基于 ymtr 3.2.2 改版构建的沉浸式铁路体验</p>
+                </header>
+                <div class="info-grid">
+                    <article class="info-card">
+                        <div class="card-icon">🚂</div>
+                        <h3>核心模组</h3>
+                        <p>ymtr 3.2.2 基于 MTR (Minecart Transportation Reimagined) 深度改版，针对信号系统、列车物理、车辆性能进行优化与本地化适配</p>
+                    </article>
+                    <article class="info-card">
+                        <div class="card-icon">🌐</div>
+                        <h3>游戏版本</h3>
+                        <p>Minecraft 1.20.1 / Fabric 加载器<br>需安装配套整合包（群文件下载）</p>
+                    </article>
+                    <article class="info-card">
+                        <div class="card-icon">🗺️</div>
+                        <h3>地图规模</h3>
+                        <p>星凝市为核心，辐射周边卫星城<br>覆盖市区地铁、城际高铁、区域快线多层级轨道网络</p>
+                    </article>
+                    <article class="info-card">
+                        <div class="card-icon">⚙️</div>
+                        <h3>运营模式</h3>
+                        <p>以建设运营为核心，欢迎热爱铁路、建筑、调度的玩家<br>非商业性质，纯净生存+创造建设</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 线路展示 / 图片画廊 -->
+        <section id="gallery" class="section gallery-section">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">GALLERY</span>
+                    <h2 class="section-title">线路与车站展示</h2>
+                    <p class="section-desc">部分建设成果截图，更多精彩等你来探索</p>
+                </header>
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- 由JS动态生成 -->
+                </div>
+                <!-- 灯箱 -->
+                <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
+                    <button class="lightbox-close" id="lightboxClose" aria-label="关闭">×</button>
+                    <button class="lightbox-prev" id="lightboxPrev" aria-label="上一张">‹</button>
+                    <button class="lightbox-next" id="lightboxNext" aria-label="下一张">›</button>
+                    <img class="lightbox-image" id="lightboxImage" src="" alt="">
+                    <div class="lightbox-caption" id="lightboxCaption"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 特色系统 -->
+        <section id="features" class="section features-section">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">FEATURES</span>
+                    <h2 class="section-title">核心特色系统</h2>
+                    <p class="section-desc">基于 ymtr 改版深度定制的游戏体验</p>
+                </header>
+                <div class="features-grid">
+                    <article class="feature-card" data-feature="atc">
+                        <div class="feature-icon">🤖</div>
+                        <h3>自动驾驶 / ATC</h3>
+                        <p>完整的自动列车控制系统，支持定点停车、限速巡航、信号响应，还原真实铁路运营体验</p>
+                        <span class="feature-tag">核心玩法</span>
+                    </article>
+                    <article class="feature-card" data-feature="signaling">
+                        <div class="feature-icon">🚦</div>
+                        <h3>真实信号系统</h3>
+                        <p>多种信号灯类型、自动闭塞、联锁逻辑，配合轨道电路实现列车间隔自动保障安全</p>
+                        <span class="feature-tag">核心玩法</span>
+                    </article>
+                    <article class="feature-card" data-feature="hsr">
+                        <div class="feature-icon">🚄</div>
+                        <h3>高铁网络</h3>
+                        <p>连接主城与卫星城的高速铁路干线，设计时速 300km/h+，体验极速穿梭快感</p>
+                        <span class="feature-tag">线路类型</span>
+                    </article>
+                    <article class="feature-card" data-feature="metro">
+                        <div class="feature-icon">🚇</div>
+                        <h3>地铁系统</h3>
+                        <p>市区多条地铁线路交织，站站换乘、大客流疏导、精美地下车站建筑群</p>
+                        <span class="feature-tag">线路类型</span>
+                    </article>
+                    <article class="feature-card" data-feature="station">
+                        <div class="feature-icon">🏗️</div>
+                        <h3>精美车站建筑</h3>
+                        <p>从市政府换乏枢纽到郊区站房，每座车站都经过精心设计，兼顾功能性与美观度</p>
+                        <span class="feature-tag">建设成果</span>
+                    </article>
+                    <article class="feature-card" data-feature="dispatch">
+                        <div class="feature-icon">📋</div>
+                        <h3>调度与运营</h3>
+                        <p>支持图定运行、临时调度、故障处理等真实运营场景，欢迎调度爱好者加入</p>
+                        <span class="feature-tag">进阶玩法</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社群联系 -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-tag">CONTACT</span>
+                    <h2 class="section-title">加入我们</h2>
+                    <p class="section-desc">我们不优秀，但热爱铁路，欢迎同好</p>
+                </header>
+                <div class="contact-grid">
+                    <a href="https://space.bilibili.com/3546812239579840" target="_blank" rel="noopener" class="contact-card owner">
+                        <div class="contact-avatar">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                        </div>
+                        <div class="contact-info">
+                            <h3>服主 · 星凝市</h3>
+                            <p>Bilibili 主页</p>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </a>
+                    <a href="https://space.bilibili.com/1295817985" target="_blank" rel="noopener" class="contact-card owner">
+                        <div class="contact-avatar">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                        </div>
+                        <div class="contact-info">
+                            <h3>副服主</h3>
+                            <p>Bilibili 主页</p>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </a>
+                    <a href="https://qm.qq.com/q/imUFCzuAJG" target="_blank" rel="noopener" class="contact-card group">
+                        <div class="contact-avatar">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <div class="contact-info">
+                            <h3>星凝市门户群</h3>
+                            <p>审核入群 · 获取整合包</p>
+                        </div>
+                        <span class="contact-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <div class="logo small">
+                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="16" width="48" height="32" rx="4" stroke="currentColor" stroke-width="3"/>
+                                <rect x="14" y="22" width="12" height="20" rx="2" fill="currentColor"/>
+                                <rect x="28" y="22" width="12" height="20" rx="2" fill="currentColor"/>
+                                <rect x="42" y="22" width="12" height="20" rx="2" fill="currentColor"/>
+                                <circle cx="16" cy="52" r="4" fill="currentColor"/>
+                                <circle cx="48" cy="52" r="4" fill="currentColor"/>
+                            </svg>
+                            <span>星凝市</span>
+                        </div>
+                        <p>Minecraft MTR模组服务器 · ymtr 3.2.2改版</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="https://space.bilibili.com/3546812239579840" target="_blank" rel="noopener">服主B站</a>
+                        <a href="https://space.bilibili.com/1295817985" target="_blank" rel="noopener">副服主B站</a>
+                        <a href="https://qm.qq.com/q/imUFCzuAJG" target="_blank" rel="noopener">QQ门户群</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>非官方服务器 · 非商业运营 · 仅供娱乐交流</p>
+                    <p class="copyright">© 2025 星凝市 · Built with ❤️ for MTR fans</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -252,7 +252,7 @@
     // ===== 滚动入场动画 =====
     function initScrollAnimations() {
         const animatedElements = document.querySelectorAll(
-            '.section-header, .info-card, .gallery-item, .feature-card, .contact-card'
+            '.section-header, .info-card, .gallery-item, .feature-card, .contact-card, .line-card, .hub-card'
         );
 
         const observer = new IntersectionObserver((entries) => {

@@ -23,11 +23,11 @@
 
     // ===== 图片数据 =====
     const galleryImages = [
-        { file: '地铁站台.jpg', title: '地铁站台', desc: '市区核心换乘站' },
-        { file: '市政府站客流状态.jpg', title: '市政府站', desc: '早晚高峰客流监控' },
-        { file: '法院.jpg', title: '法院站', desc: '地标性地下车站' },
-        { file: '车头司机位.jpg', title: '驾驶视角', desc: '列车司机室内景' },
-        { file: '高铁站台.jpg', title: '高铁站台', desc: '城际高速铁路站台' }
+        { file: '地铁站台.jpg', title: '地铁站台', desc: '市区核心换乘站', span: 'wide' },
+        { file: '市政府站客流状态.jpg', title: '市政府站', desc: '早晚高峰客流监控', span: 'normal' },
+        { file: '法院.jpg', title: '法院站', desc: '地标性地下车站', span: 'normal' },
+        { file: '车头司机位.jpg', title: '驾驶视角', desc: '列车司机室内景', span: 'tall' },
+        { file: '高铁站台.jpg', title: '高铁站台', desc: '城际高速铁路站台', span: 'wide' }
     ];
 
     let currentLightboxIndex = 0;
@@ -124,7 +124,7 @@
     function initGallery() {
         galleryImages.forEach((img, index) => {
             const item = document.createElement('div');
-            item.className = 'gallery-item loading';
+            item.className = `gallery-item loading ${img.span || 'normal'}`;
             item.dataset.index = index;
             item.innerHTML = `
                 <img src="assets/images/${encodeURIComponent(img.file)}" alt="${img.title}" loading="lazy">

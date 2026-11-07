@@ -7,6 +7,8 @@
     const enterPrompt = document.getElementById('enterPrompt');
     const mainContent = document.getElementById('mainContent');
     const bgm = document.getElementById('bgm');
+    const musicToggle = document.getElementById('musicToggle');
+    const volumeSlider = document.getElementById('volumeSlider');
     const copyIpBtn = document.getElementById('copyIp');
     const serverIpEl = document.getElementById('serverIp');
     const galleryGrid = document.getElementById('galleryGrid');
@@ -71,10 +73,22 @@
 
     // ===== 背景音乐 =====
     function initMusic() {
+        // 设置初始音量
+        bgm.volume = parseFloat(volumeSlider.value);
+
+        // 播放/暂停切换
+        musicToggle.addEventListener('click', toggleMusic);
+
+        // 音量滑块
+        volumeSlider.addEventListener('input', (e) => {
+            bgm.volume = parseFloat(e.target.value);
+        });
+
         // 页面可见性变化时暂停/恢复
         document.addEventListener('visibilitychange', () => {
             if (document.hidden && !bgm.paused) {
                 bgm.pause();
+                musicToggle.classList.remove('playing');
             }
         });
     }
@@ -85,9 +99,24 @@
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 musicStarted = true;
+                musicToggle.classList.add('playing');
             }).catch(() => {
                 // 自动播放被阻止，静默处理
+                musicToggle.classList.remove('playing');
             });
+        }
+    }
+
+    function toggleMusic() {
+        if (bgm.paused) {
+            bgm.play().then(() => {
+                musicToggle.classList.add('playing');
+            }).catch(() => {
+                showToast('浏览器阻止了自动播放');
+            });
+        } else {
+            bgm.pause();
+            musicToggle.classList.remove('playing');
         }
     }
 

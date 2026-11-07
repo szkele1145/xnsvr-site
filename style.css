@@ -172,6 +172,142 @@ body {
     margin-bottom: var(--space-lg);
 }
 
+/* ===== 音乐控制 ===== */
+.music-control {
+    position: fixed;
+    bottom: var(--space-xl);
+    right: var(--space-xl);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    padding: var(--space-sm) var(--space-md);
+    box-shadow: var(--shadow-medium);
+    transition: all var(--transition-base);
+}
+
+.music-control:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-medium), 0 0 20px var(--glow-primary);
+}
+
+.music-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: transparent;
+    border: none;
+    color: var(--fg-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.music-toggle:hover {
+    background: rgba(0, 212, 170, 0.15);
+}
+
+.music-toggle:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.music-toggle svg {
+    width: 20px;
+    height: 20px;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.music-toggle .icon-pause {
+    display: none;
+}
+
+.music-toggle.playing .icon-play {
+    display: none;
+}
+
+.music-toggle.playing .icon-pause {
+    display: block;
+}
+
+.volume-slider-wrap {
+    display: flex;
+    align-items: center;
+    width: 0;
+    overflow: hidden;
+    transition: width var(--transition-base), opacity var(--transition-base);
+    opacity: 0;
+}
+
+.music-control:hover .volume-slider-wrap,
+.music-control:focus-within .volume-slider-wrap {
+    width: 100px;
+    opacity: 1;
+}
+
+.volume-slider {
+    width: 100%;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--border-color);
+    border-radius: var(--radius-full);
+    outline: none;
+    cursor: pointer;
+    accent-color: var(--accent-primary);
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px var(--glow-primary);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .music-control {
+        bottom: var(--space-md);
+        right: var(--space-md);
+        padding: var(--space-xs) var(--space-sm);
+    }
+
+    .volume-slider-wrap {
+        width: 80px;
+        opacity: 1;
+    }
+
+    .music-toggle {
+        width: 36px;
+        height: 36px;
+    }
+}
+
 /* ===== 主内容 ===== */
 .main-content {
     position: relative;

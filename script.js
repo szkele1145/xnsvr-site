@@ -7,7 +7,6 @@
     const enterPrompt = document.getElementById('enterPrompt');
     const mainContent = document.getElementById('mainContent');
     const bgm = document.getElementById('bgm');
-    const musicToggle = document.getElementById('musicToggle');
     const copyIpBtn = document.getElementById('copyIp');
     const serverIpEl = document.getElementById('serverIp');
     const galleryGrid = document.getElementById('galleryGrid');
@@ -22,11 +21,11 @@
 
     // ===== 图片数据 =====
     const galleryImages = [
-        { file: '地铁站台.png', title: '地铁站台', desc: '市区核心换乘站' },
-        { file: '市政府站客流状态.png', title: '市政府站', desc: '早晚高峰客流监控' },
-        { file: '法院.png', title: '法院站', desc: '地标性地下车站' },
-        { file: '车头司机位.png', title: '驾驶视角', desc: '列车司机室内景' },
-        { file: '高铁站台.png', title: '高铁站台', desc: '城际高速铁路站台' }
+        { file: '地铁站台.jpg', title: '地铁站台', desc: '市区核心换乘站' },
+        { file: '市政府站客流状态.jpg', title: '市政府站', desc: '早晚高峰客流监控' },
+        { file: '法院.jpg', title: '法院站', desc: '地标性地下车站' },
+        { file: '车头司机位.jpg', title: '驾驶视角', desc: '列车司机室内景' },
+        { file: '高铁站台.jpg', title: '高铁站台', desc: '城际高速铁路站台' }
     ];
 
     let currentLightboxIndex = 0;
@@ -48,9 +47,6 @@
     // ===== 进站提示：点击任意位置进入 =====
     function initEnterPrompt() {
         function enterSite(e) {
-            // 忽略点击在音乐按钮上的事件
-            if (e.target.closest('.music-toggle')) return;
-
             enterPrompt.classList.add('hidden');
             setTimeout(() => {
                 enterPrompt.style.display = 'none';
@@ -75,15 +71,10 @@
 
     // ===== 背景音乐 =====
     function initMusic() {
-        if (!musicToggle) return;
-
-        musicToggle.addEventListener('click', toggleMusic);
-
         // 页面可见性变化时暂停/恢复
         document.addEventListener('visibilitychange', () => {
             if (document.hidden && !bgm.paused) {
                 bgm.pause();
-                musicToggle.classList.remove('playing');
             }
         });
     }
@@ -94,24 +85,9 @@
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 musicStarted = true;
-                musicToggle.classList.add('playing');
             }).catch(() => {
-                // 自动播放被阻止，等待用户交互
-                musicToggle.classList.remove('playing');
+                // 自动播放被阻止，静默处理
             });
-        }
-    }
-
-    function toggleMusic() {
-        if (bgm.paused) {
-            bgm.play().then(() => {
-                musicToggle.classList.add('playing');
-            }).catch(() => {
-                showToast('浏览器阻止了自动播放');
-            });
-        } else {
-            bgm.pause();
-            musicToggle.classList.remove('playing');
         }
     }
 

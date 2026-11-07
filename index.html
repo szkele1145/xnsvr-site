@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="星凝市 - Minecraft MTR模组服务器 | ymtr 3.2.2改版 | 1.20.1 Fabric">
+    <meta name="description" content="星凝市 - Minecraft MTR模组服务器 | ymtr改版 | 1.20.1 Fabric">
     <title>星凝市 · MTR服务器</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 背景音乐（静默自动播放，用户交互后生效） -->
+    <!-- 背景音乐 -->
     <audio id="bgm" src="assets/audio/bgm.mp3" loop preload="auto"></audio>
 
     <!-- 粒子背景画布 -->
@@ -20,7 +17,7 @@
     <!-- 进站提示 -->
     <div class="enter-prompt" id="enterPrompt">
         <div class="prompt-content">
-            <div class="prompt-icon">🚇</div>
+            <img src="assets/images/logo.jpg" alt="星凝市" class="prompt-logo">
             <h2>欢迎来到星凝市</h2>
             <p>点击任意位置进站</p>
         </div>
@@ -33,14 +30,7 @@
             <div class="header-inner">
                 <div class="header-left">
                     <a href="#" class="logo">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="8" y="16" width="48" height="32" rx="4" stroke="currentColor" stroke-width="3"/>
-                            <rect x="14" y="22" width="12" height="20" rx="2" fill="currentColor"/>
-                            <rect x="28" y="22" width="12" height="20" rx="2" fill="currentColor"/>
-                            <rect x="42" y="22" width="12" height="20" rx="2" fill="currentColor"/>
-                            <circle cx="16" cy="52" r="4" fill="currentColor"/>
-                            <circle cx="48" cy="52" r="4" fill="currentColor"/>
-                        </svg>
+                        <img src="assets/images/logo.jpg" alt="星凝市" class="logo-img">
                         <span class="logo-text">星凝市</span>
                     </a>
                     <nav class="nav">
@@ -62,7 +52,7 @@
         <!-- Hero 区域 -->
         <section class="hero" id="hero">
             <div class="hero-content">
-                <div class="hero-badge">ymtr 3.2.2改版 · 1.20.1 Fabric</div>
+                <div class="hero-badge">ymtr改版 · 1.20.1 Fabric</div>
                 <h1 class="hero-title">
                     <span class="title-line">星凝市</span>
                     <span class="title-line title-sub">Minecraft 铁路模组服务器</span>
@@ -71,7 +61,7 @@
                 <div class="hero-meta">
                     <div class="meta-item">
                         <span class="meta-label">核心模组</span>
-                        <span class="meta-value">ymtr 3.2.2 (MTR深度改版)</span>
+                        <span class="meta-value">ymtr (MTR深度改版)</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">游戏版本</span>
@@ -105,7 +95,7 @@
                 <header class="section-header">
                     <span class="section-tag">ABOUT</span>
                     <h2 class="section-title">关于这个服务器</h2>
-                    <p class="section-desc">基于 ymtr 3.2.2 改版，做了些自己的调整和优化</p>
+                    <p class="section-desc">基于 ymtr 改版，做了些自己的调整和优化</p>
                 </header>
                 <div class="info-grid">
                     <article class="info-card">
@@ -217,8 +207,8 @@
                             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
                         </div>
                         <div class="contact-info">
-                            <h3>服主</h3>
-                            <p>B站 @星凝市</p>
+                            <h3>服主 · 七夜</h3>
+                            <p>B站主页</p>
                         </div>
                         <span class="contact-arrow">→</span>
                     </a>
@@ -227,7 +217,7 @@
                             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
                         </div>
                         <div class="contact-info">
-                            <h3>副服主</h3>
+                            <h3>副服主 · 洛尘</h3>
                             <p>B站主页</p>
                         </div>
                         <span class="contact-arrow">→</span>
@@ -252,21 +242,14 @@
                 <div class="footer-content">
                     <div class="footer-brand">
                         <a href="#" class="logo small">
-                            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="8" y="16" width="48" height="32" rx="4" stroke="currentColor" stroke-width="3"/>
-                                <rect x="14" y="22" width="12" height="20" rx="2" fill="currentColor"/>
-                                <rect x="28" y="22" width="12" height="20" rx="2" fill="currentColor"/>
-                                <rect x="42" y="22" width="12" height="20" rx="2" fill="currentColor"/>
-                                <circle cx="16" cy="52" r="4" fill="currentColor"/>
-                                <circle cx="48" cy="52" r="4" fill="currentColor"/>
-                            </svg>
+                            <img src="assets/images/logo.jpg" alt="星凝市" class="logo-img">
                             <span>星凝市</span>
                         </a>
-                        <p>Minecraft MTR模组服务器 · ymtr 3.2.2改版</p>
+                        <p>Minecraft MTR模组服务器 · ymtr改版</p>
                     </div>
                     <div class="footer-links">
-                        <a href="https://space.bilibili.com/3546812239579840" target="_blank" rel="noopener">服主B站</a>
-                        <a href="https://space.bilibili.com/1295817985" target="_blank" rel="noopener">副服主B站</a>
+                        <a href="https://space.bilibili.com/3546812239579840" target="_blank" rel="noopener">服主 · 七夜</a>
+                        <a href="https://space.bilibili.com/1295817985" target="_blank" rel="noopener">副服主 · 洛尘</a>
                         <a href="https://qm.qq.com/q/imUFCzuAJG" target="_blank" rel="noopener">QQ门户群</a>
                     </div>
                 </div>

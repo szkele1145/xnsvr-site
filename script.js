@@ -23,11 +23,11 @@
 
     // ===== 图片数据 =====
     const galleryImages = [
-        { file: '地铁站台.jpg', title: '地铁站台', desc: '市区核心换乘站', span: 'wide' },
-        { file: '市政府站客流状态.jpg', title: '市政府站', desc: '早晚高峰客流监控', span: 'normal' },
-        { file: '法院.jpg', title: '法院站', desc: '地标性地下车站', span: 'normal' },
-        { file: '车头司机位.jpg', title: '驾驶视角', desc: '列车司机室内景', span: 'tall' },
-        { file: '高铁站台.jpg', title: '高铁站台', desc: '城际高速铁路站台', span: 'wide' }
+        { file: '地铁站台.jpg', title: '地铁站台', desc: '市区核心换乘站', caption: '岛式站台设计，全封闭站台门，配备 PIS 与应急照明', span: 'wide' },
+        { file: '市政府站客流状态.jpg', title: '市政府站', desc: '早晚高峰客流监控', caption: '一三号线换乘枢纽，日均客流设计 18 万，高峰疏散压力大', span: 'normal' },
+        { file: '法院.jpg', title: '法院站', desc: '地标性地下车站', caption: '艺术天窗引入自然光，白天减少照明能耗', span: 'normal' },
+        { file: '车头司机位.jpg', title: '驾驶视角', desc: '列车司机室内景', caption: 'ATC 车载设备、信号显示屏、紧急制动装置一应俱全', span: 'tall' },
+        { file: '高铁站台.jpg', title: '高铁站台', desc: '城际高速铁路站台', caption: '侧式站台配安全门，设计时速 300 km/h，预留城际联络线', span: 'wide' }
     ];
 
     let currentLightboxIndex = 0;
@@ -128,9 +128,12 @@
             item.dataset.index = index;
             item.innerHTML = `
                 <img src="assets/images/${encodeURIComponent(img.file)}" alt="${img.title}" loading="lazy">
-                <div class="gallery-overlay">
+                <div class="gallery-caption">
                     <h3>${img.title}</h3>
-                    <p>${img.desc}</p>
+                    <p>${img.caption}</p>
+                </div>
+                <div class="gallery-overlay">
+                    <span class="zoom-hint">点击放大</span>
                 </div>
             `;
 
